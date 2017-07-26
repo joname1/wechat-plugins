@@ -2,7 +2,7 @@
 纯粹学习而已。
 
 ## 用到的东西
-vue2 + vue-router + vue-resource + webpack + SUI
+vue2 + vue-router + vue-resource + webpack + SUI + Easy Mock
 
 
 ## 效果演示
@@ -19,7 +19,7 @@ vue2 + vue-router + vue-resource + webpack + SUI
 ## Build Setup
 ``` bash
 # install dependencies
-npm install or yarn
+npm install
 
 # serve with hot reload at localhost:8080
 npm run dev
@@ -29,13 +29,4 @@ npm run build
 
 # build for production and view the bundle analyzer report
 npm run build --report
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
 ```
