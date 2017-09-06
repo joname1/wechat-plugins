@@ -20,7 +20,7 @@
                                     <span>微信版本: {{item.version}}</span>
                                 </div>
                                 <div class="item-text">                                        
-                                    <span>支持iOS7.0~iOS10.3</span>
+                                    <span v-text="byfree"></span>
                                 </div>
                             </div>
                         </li>
@@ -40,6 +40,7 @@ export default {
   data: function() {
     return {
         header_title: "iOS微信免越狱下载",
+        byfree: "本站软件永久免费!",
         listData: ""
     }
   },
@@ -50,13 +51,11 @@ export default {
     getDatas: function() {
         this.$http.get("https://www.easy-mock.com/mock/5968a4edeec7d75c08df4544/joe/listdata").then(response => {
         this.listData = response.body.data;
-        // console.log(listData)
         },error => {
             console.log(error);
         });
     },
     Details: function(id) {
-        // console.log(id);
         this.$router.push("/detail?id="+id)
     }
   }

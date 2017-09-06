@@ -11,11 +11,10 @@
             <div class="app_logo">
                 <img :src="details.img">
             </div>
-            <p class="app_name">「{{details.title}}」</p>
             <p class="app_desc">{{details.description}}</p>
             <div class="more_info">
                 <p>版本: {{details.version}} ({{details.size}})</p>
-                <p>支持: iOS7.0~iOS10.3</p>
+                <p>本站软件收集于互联网!</p>
                 <div class="load_fixed">
                     <a :href="'itms-services://?action=download-manifest&url='+details.url" class="button button-fill button-big" @click="usesafari">点击安装</a>
                 </div>
@@ -40,11 +39,9 @@ export default {
   methods:{
     getDetails: function() {
         var Appid = this.$route.query.id;
-        // console.log(Appid)
         this.$http.get("https://www.easy-mock.com/mock/5968a4edeec7d75c08df4544/joe/listdata").then(response => {
             for(var i=0, len=response.body.data.length; i<len; i++){
                 this.details = response.body.data[Appid];
-                // console.log(details)
             }
         },error => {
             console.log(error);
