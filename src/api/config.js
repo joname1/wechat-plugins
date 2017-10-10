@@ -1,0 +1,1 @@
+export const url = 'https://www.easy-mock.com/mock/5968a4edeec7d75c08df4544/joe/listdata'

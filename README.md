@@ -1,5 +1,5 @@
 ## wechat-plugins
-纯粹学习而已。
+纯粹学习、熟悉代码。
 
 ## 用到的东西
 vue2 + vue-router + vue-resource + webpack + SUI + Easy Mock

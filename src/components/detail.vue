@@ -3,20 +3,23 @@
     <div class="page page-current">
         <header class="bar bar-nav">
             <router-link to="/gohome" class="external button button-link button-nav pull-left" data-no-cache="true">
-                <span class="icon icon-left"></span> 返回
+                <span class="icon icon-left"></span>
             </router-link>
             <h1 class="title" v-text="details.title"></h1>
         </header>
+        <div class="loading" v-show="!details.img">
+            <img src="../assets/loading.gif" width="60" height="60">
+        </div>
         <div class="content">
             <div class="app_logo">
                 <img :src="details.img">
             </div>
             <p class="app_desc">{{details.description}}</p>
             <div class="more_info">
-                <p>版本: {{details.version}} ({{details.size}})</p>
+                <p v-show="details.size">版本: {{details.version}} ({{details.size}})</p>
                 <p>本站软件收集于互联网!</p>
                 <div class="load_fixed">
-                    <a :href="'itms-services://?action=download-manifest&url='+details.url" class="button button-fill button-big" @click="usesafari">点击安装</a>
+                    <a :href="'itms-services://?action=download-manifest&url='+details.url" class="button button-fill button-big" @click="useSafari">点击安装</a>
                 </div>
                 <p>提示: 请使用Safari浏览器打开!</p>
             </div>
@@ -26,25 +29,24 @@
 </template>
 
 <script>
+import {url} from 'api/config'
 export default {
   name: 'detail',
   data: function() {
     return {
-      details: ""
+      details: []
     }
   },
   created: function() {
-    this.getDetails();
+    this._getDetails();
   },
   methods:{
-    getDetails: function() {
+    _getDetails: function() {
         var Appid = this.$route.query.id;
-        this.$http.get("https://www.easy-mock.com/mock/5968a4edeec7d75c08df4544/joe/listdata").then(response => {
-            for(var i=0, len=response.body.data.length; i<len; i++){
-                this.details = response.body.data[Appid];
+        this.$http.get(url).then((res) => {
+            for(var i=0, len=res.body.data.length; i<len; i++){
+                this.details = res.body.data[Appid];
             }
-        },error => {
-            console.log(error);
         });
     },
     is_ios: function() {
@@ -62,7 +64,7 @@ export default {
             return false;
         }
     },
-    usesafari: function() {
+    useSafari: function() {
         var browser = {
         versions: function() {
             var u = navigator.userAgent, app = navigator.appVersion;
@@ -112,4 +114,5 @@ export default {
 .load_fixed{position:relative;}
 .fixing .fa-circle-o-notch{color:#fff; font-weight:100; width:100%; text-align:center; position:absolute; top:0px;}
 .load_fixed .home_key{position:absolute; top:0px; font-size:14px;}
+.loading{text-align: center;position: relative;top: 10rem;}
 </style>

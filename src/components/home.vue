@@ -19,12 +19,15 @@
                                 <div class="item-subtitle">
                                     <span>微信版本: {{item.version}}</span>
                                 </div>
-                                <div class="item-text">                                        
+                                <div class="item-text">              
                                     <span v-text="byfree"></span>
                                 </div>
                             </div>
                         </li>
                     </ul>
+                    <div class="loading" v-show="!listData.length">
+                        <img src="../assets/loading.gif" width="60" height="60">
+                    </div>
                     <footer>
                         <p class="rights">2017 © Joname.</p>
                     </footer>
@@ -35,24 +38,23 @@
 </template>
 
 <script>
+import {url} from 'api/config'
 export default {
   name: 'home',
   data: function() {
     return {
         header_title: "iOS微信免越狱下载",
         byfree: "本站软件永久免费!",
-        listData: ""
+        listData: []
     }
   },
   created: function() {
-    this.getDatas();
+    this._getDatas();
   },
   methods:{
-    getDatas: function() {
-        this.$http.get("https://www.easy-mock.com/mock/5968a4edeec7d75c08df4544/joe/listdata").then(response => {
-        this.listData = response.body.data;
-        },error => {
-            console.log(error);
+    _getDatas: function() {
+        this.$http.get(url).then((res) => {
+            this.listData = res.body.data;
         });
     },
     Details: function(id) {
@@ -65,4 +67,5 @@ export default {
 .item-img {border-radius: 50%;width: 4rem;}
 .item-subtitle,.item-text{color:#007AFF;}
 .rights{color:#3d4145;text-align: center;}
+.loading{text-align: center;}
 </style>
